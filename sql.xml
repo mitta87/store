@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>SQL queries</comment>
+
+<entry key="listOfLeafs">
+SELECT t1.cat_id, t1.cat_name FROM
+Category AS t1 LEFT JOIN Category as t2
+ON t1.cat_id = t2.parent_cat_id
+WHERE t2.cat_id IS NULL
+</entry>
+
+<entry key="allCats">
+select * from Category
+</entry>
+
+<entry key="goodsOfCategory">
+select g.good_id, g.mkr_id, m.mkr_name, g.category_id, 
+g.model_code, g.price, g.image, g.good_info, g.available
+from Good g
+join Maker m
+on m.mkr_id = g.mkr_id
+where g.category_id = ?
+</entry>
+
+<entry key="insertGood">
+exec insertGoodWithoutId ?, ?, ?, ?, ?
+</entry>
+
+<entry key="deleteGood">
+delete from good where good_id = ?
+</entry>
+
+
+<entry key="allGoods">
+select g.good_id, g.mkr_id, m.mkr_name, g.category_id, 
+g.model_code, g.price, g.image, g.good_info, g.available
+from Good g
+join Maker m
+on m.mkr_id = g.mkr_id
+</entry>
+</properties>
